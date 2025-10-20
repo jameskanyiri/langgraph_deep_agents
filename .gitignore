@@ -8,3 +8,9 @@ wheels/
 
 # Virtual environments
 .venv
+
+# Environment variables
+.env
+
+# LangGraph API cache
+.langgraph_api
