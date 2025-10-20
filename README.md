@@ -1,12 +1,19 @@
 # LangGraph Deep Agent
 
-A deep research agent built with LangGraph that dynamically loads skills to complete specialized tasks.
+A deep research agent built with LangGraph that conducts thorough, multi-layered research through dynamic skill loading, intelligent planning, context management, and task delegation.
 
-## What is This?
+## What is a Deep Research Agent?
 
-This is a **deep agent** - an AI agent that can dynamically load and use **skills** to improve its performance on specialized tasks.
+A **deep research agent** is an AI system that can conduct comprehensive research by breaking down complex queries into manageable parts, delegating work to specialized sub-agents, and dynamically loading domain expertise as needed.
 
-### What are Skills?
+This agent has four core components:
+
+1. **✅ Skill Loading** (Implemented) - Dynamically loads domain expertise
+2. **🔄 Planning** (Coming Soon) - Breaks down complex research into structured plans
+3. **🔄 Context Offloading** (Coming Soon) - Manages memory efficiently for long research sessions
+4. **🔄 Sub Agents** (Coming Soon) - Delegates specialized research to focused sub-agents
+
+## What are Skills?
 
 Skills are folders of instructions, scripts, and resources that the agent loads dynamically to improve performance on specialized tasks. Skills teach the agent how to complete specific tasks in a repeatable way, whether that's:
 
@@ -15,24 +22,44 @@ Skills are folders of instructions, scripts, and resources that the agent loads 
 - Following research methodologies
 - Automating domain-specific tasks
 
-## Current Features
+## Current Implementation
 
-### ✅ Skills System
+### ✅ Skill Loading System
+
+The first component is fully implemented, enabling the agent to:
 
 - **List Skills**: Discover available skills without loading them
 - **Load Skills**: Dynamically load specific skills when needed
-- **Modular Design**: Each skill is a self-contained folder with instructions and examples
+- **Modular Design**: Each skill is a self-contained folder with instructions
 
-### Skills Included
+**Available Skills:**
 
-1. **Brand Writing** - Guidelines for maintaining consistent brand voice and formatting
-2. **Research Guidelines** - Structured approach to research with citation standards
+- **Brand Writing** - Guidelines for maintaining consistent brand voice and formatting
+- **Research Guidelines** - Structured approach to research with citation standards
 
-## Upcoming Features
+## Architecture Overview
 
-- 🔄 **Planning**: Advanced task planning and decomposition
-- 💾 **Context Offloading**: Efficient memory management for long-running tasks
-- 🤖 **Sub Agents**: Spawn specialized sub-agents for complex tasks
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    Deep Research Agent                       │
+├─────────────────────────────────────────────────────────────┤
+│                                                              │
+│  ✅ Skill Loading      → Load domain expertise on-demand    │
+│  🔄 Planning           → Decompose research into tasks      │
+│  🔄 Context Offloading → Manage long-term memory           │
+│  🔄 Sub Agents         → Delegate specialized research      │
+│                                                              │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### How Deep Research Will Work (When Complete)
+
+1. **User asks a complex research question**
+2. **Planning**: Agent creates a structured research plan
+3. **Skill Loading**: Loads relevant domain expertise
+4. **Sub Agents**: Spawns specialized agents for different research aspects
+5. **Context Offloading**: Manages information efficiently across long sessions
+6. **Synthesis**: Combines findings into comprehensive results
 
 ## Quick Start
 
@@ -45,7 +72,7 @@ Skills are folders of instructions, scripts, and resources that the agent loads 
 
 ```bash
 # Clone the repository
-git clone <your-repo-url>
+git clone https://github.com/jameskanyiri/langgraph_deep_agents.git
 cd langgraph_deep_agent
 
 # Install dependencies
@@ -68,16 +95,9 @@ Or use programmatically:
 from src.graph import agent
 
 result = agent.invoke({
-    "messages": [("user", "Your task here")]
+    "messages": [("user", "Your research question here")]
 })
 ```
-
-## How It Works
-
-1. **User makes a request** → Agent receives the task
-2. **Agent lists available skills** → Discovers what capabilities exist
-3. **Agent loads relevant skills** → Loads only what's needed for the task
-4. **Agent executes with skills** → Uses loaded instructions to complete the task
 
 ## Project Structure
 
@@ -140,7 +160,7 @@ langgraph_deep_agent/
 
 4. **Agent auto-discovers it** - No code changes needed!
 
-## Example Usage
+## Example Usage (Current)
 
 **Listing Skills:**
 
@@ -149,18 +169,18 @@ User: "What skills do you have?"
 Agent: Lists all available skills with their purposes
 ```
 
-**Research Task:**
+**Research with Guidelines:**
 
 ```
 User: "Research webhook security best practices"
 Agent:
-  → Lists skills
+  → Lists available skills
   → Loads research_guidelines_skill
   → Conducts structured research with citations
   → Returns findings
 ```
 
-**Writing Task:**
+**Brand-Compliant Writing:**
 
 ```
 User: "Write a product update announcement"
@@ -169,6 +189,35 @@ Agent:
   → Applies brand guidelines
   → Produces on-brand content
 ```
+
+## Roadmap
+
+### Phase 1: Skill Loading ✅ Complete
+
+- [x] Skill discovery system
+- [x] Dynamic skill loading
+- [x] Basic research and writing skills
+
+### Phase 2: Planning 🔄 In Progress
+
+- [ ] Task decomposition
+- [ ] Research plan generation
+- [ ] Query analysis and breakdown
+- [ ] Structured thinking steps
+
+### Phase 3: Context Offloading 🔄 Planned
+
+- [ ] Memory management system
+- [ ] Context compression
+- [ ] Long-term information storage
+- [ ] Retrieval mechanisms
+
+### Phase 4: Sub Agents 🔄 Planned
+
+- [ ] Sub-agent spawning
+- [ ] Task delegation
+- [ ] Parallel research execution
+- [ ] Result aggregation
 
 ## Configuration
 
@@ -191,6 +240,23 @@ Edit `src/prompt.py` to change agent behavior and instructions.
 - `langgraph` - Agent orchestration
 - `langgraph-cli` - Development tools
 
+## Why Deep Research?
+
+Traditional research agents have limitations:
+
+- ❌ Can't handle complex, multi-faceted queries
+- ❌ Run out of context on long research sessions
+- ❌ Lack specialized domain knowledge
+- ❌ Can't work in parallel on sub-tasks
+
+Deep research agents solve this:
+
+- ✅ Break down complex queries systematically
+- ✅ Manage context efficiently across long sessions
+- ✅ Load domain expertise on-demand
+- ✅ Delegate work to specialized sub-agents
+- ✅ Synthesize findings comprehensively
+
 ## Troubleshooting
 
 **Skills not loading?**
@@ -208,24 +274,16 @@ Edit `src/prompt.py` to change agent behavior and instructions.
 - Ensure Python 3.13+ is installed
 - Run `uv sync` to install dependencies
 
-## Why Skills?
-
-Traditional agents have all their knowledge baked in, making them:
-
-- ❌ Hard to maintain
-- ❌ Difficult to customize
-- ❌ Expensive (loading unused context)
-
-Skills make agents:
-
-- ✅ Modular and maintainable
-- ✅ Easy to customize
-- ✅ Efficient (load only what's needed)
-- ✅ Shareable across teams
-
 ## Contributing
 
-Add new skills, improve existing ones, or enhance the agent's core capabilities. Pull requests welcome!
+We're actively building the remaining components! Contributions welcome for:
+
+- New skills
+- Planning system implementation
+- Context management strategies
+- Sub-agent architectures
+
+Pull requests welcome!
 
 ## License
 
